@@ -21,7 +21,7 @@
   }
 
   function _handleClick(evt) {
-    let LENGTH   = 16,
+    let LENGTH   = 32,
         audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
         options  = {
           mediaStream : evt
