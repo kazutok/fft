@@ -50,8 +50,8 @@
       analyser.getByteTimeDomainData(data);
       
       for (i = 0; i < LENGTH; ++i) {
-//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
-        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
+        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
+//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
       }
 
       ctx.fill();
