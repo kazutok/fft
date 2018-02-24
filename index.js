@@ -33,7 +33,7 @@
         i      = 0;
 
     btn.classList.add("off");
-    analyser.fftSize = 1024;
+    analyser.fftSize = 4096;
     src.connect(analyser);
     alert(audioCtx.sampleRate);
 
@@ -48,7 +48,7 @@
       analyser.getByteFrequencyData(data);
 
       for (i = 0; i < LENGTH; ++i) {
-        ctx.rect(i * w, canvas.height - data[i] * 2, w, data[i] * 2);
+        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
       }
 
       ctx.fill();
