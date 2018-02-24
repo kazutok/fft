@@ -32,16 +32,17 @@
         w      = 0,
         i      = 0;
 
+    alert(audioCtx.sampleRate + " Hz");
     btn.classList.add("off");
-    analyser.fftSize = 32768;
+    analyser.fftSize = 4096;
     src.connect(analyser);
-    alert(audioCtx.sampleRate);
+    alert("fft start");
 
     setInterval(() => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      ctx.fillStyle = "#3e3e3e";
+      ctx.fillStyle = "#ff0000";
 
       w = canvas.width / LENGTH,
 
