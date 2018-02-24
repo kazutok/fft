@@ -34,7 +34,7 @@
 
     alert(audioCtx.sampleRate + " Hz");
     btn.classList.add("off");
-    analyser.fftSize = 4096;
+    analyser.fftSize = 2048;
     src.connect(analyser);
     alert("fft start");
 
