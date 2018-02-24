@@ -21,7 +21,7 @@
   }
 
   function _handleClick(evt) {
-    let LENGTH   = 256,
+    let LENGTH   = 64,
         audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
         options  = {
           mediaStream : evt
@@ -35,6 +35,7 @@
     btn.classList.add("off");
     analyser.fftSize = 1024;
     src.connect(analyser);
+    alert(audioCtx.sampleRate);
 
     setInterval(() => {
       canvas.width  = window.innerWidth;
