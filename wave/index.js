@@ -44,14 +44,13 @@
       canvas.height = window.innerHeight;
 
       ctx.fillStyle = "#ff0000"; //DARK RED
-      ctx.font = "italic 40px Arial";
+      ctx.font = "10px Arial";
 
       w = canvas.width / LENGTH,
 
 //      analyser.getByteFrequencyData(data);
       analyser.getByteTimeDomainData(data);
       
-      count = 0;
       for (i = 0; i < LENGTH; ++i) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
