@@ -46,8 +46,9 @@
 
       w = canvas.width / LENGTH,
 
-      analyser.getByteFrequencyData(data);
-
+//      analyser.getByteFrequencyData(data);
+      analyser.getByteTimeDomainData(data);
+      
       for (i = 0; i < LENGTH; ++i) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
       }
