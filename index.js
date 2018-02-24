@@ -42,7 +42,7 @@
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      ctx.fillStyle = "#3e3e3e";
+      ctx.fillStyle = "#bb0000"; //DARK RED
 
       w = canvas.width / LENGTH,
 
