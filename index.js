@@ -33,7 +33,7 @@
         i      = 0;
 
     btn.classList.add("off");
-    analyser.fftSize = 1024;
+    analyser.fftSize = 48000;
     src.connect(analyser);
     alert(audioCtx.sampleRate);
 
