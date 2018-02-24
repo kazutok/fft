@@ -44,7 +44,7 @@
       canvas.height = window.innerHeight;
 
       ctx.fillStyle = "#ff0000"; //DARK RED
-      ctx.font = "10px Arial";
+      ctx.font = "20px Arial";
 
       w = canvas.width / LENGTH,
 
@@ -60,7 +60,7 @@
       }
 
       ctx.fill();
-      ctx.fillText("PEAK COUNT: " + count, 10, 10);
+      ctx.fillText("PEAK COUNT: " + count, 10, 25);
     }, 20);
   }
 
