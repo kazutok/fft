@@ -33,7 +33,7 @@
         i      = 0;
 
     btn.classList.add("off");
-    analyser.fftSize = 2048;
+    analyser.fftSize = 1024;
     src.connect(analyser);
 
     setInterval(() => {
