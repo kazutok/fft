@@ -52,6 +52,8 @@
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
+      ctx.fillStyle = "#ff0000"; //DARK RED
+      ctx.font = "20px Arial";
       w = canvas.width / LENGTH,
 //      analyser.getByteFrequencyData(data);
 //      data3 = data2;
@@ -76,7 +78,6 @@
         peakcount = 0;
       }
       
-      ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
@@ -85,7 +86,7 @@
         }
       }
 
-      ctx.fillStyle = "#000000"; //blue
+      ctx.fillStyle = "#0000ff"; //blue
       ctx.rect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
 
       ctx.fill();
