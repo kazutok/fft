@@ -39,12 +39,12 @@
     src.connect(analyser);
 //    alert("fft start");
 
+      ctx.fillStyle = "#ff0000"; //DARK RED
+      ctx.font = "20px Arial";
+
     setInterval(() => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      ctx.fillStyle = "#ff0000"; //DARK RED
-      ctx.font = "20px Arial";
 
       w = canvas.width / LENGTH,
 
