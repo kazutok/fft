@@ -41,7 +41,7 @@
 
     setInterval(() => {
       canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight/2;
+      canvas.height = window.innerHeight;
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
@@ -56,7 +56,7 @@
       
       
       for (i = 0; i < LENGTH; i++) {
-        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
+        ctx.rect(i * w, canvas.height*(1 - data[i]/255/2), w, canvas.height*data[i]/255/2);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
         if(data[i] > 200){
           count++;
