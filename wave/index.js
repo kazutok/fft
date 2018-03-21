@@ -48,10 +48,12 @@
     for (i = 0; i < LENGTH; i++) {
       ave += data[i];
     }
+    alert("ave:"+ave);
     ave = Math.round(ave/LENGTH);
     for (i = 0; i < LENGTH; i++) {
       rms += (data[i]-ave)*(data[i]-ave);
     }
+    alert("rms:"+rms);
     rms = rms/LENGTH;
     rms = Math.round(Math.sqrt(rms));
     threshold = rms*3;
