@@ -45,6 +45,8 @@
 //    alert("fft start");
 
     analyser.getByteTimeDomainData(data);
+    alert("data1:"+data[1]+"\n data2:"+data[2]+"\n data3:"+data[3]);
+    
     for (i = 0; i < LENGTH; i++) {
       ave += data[i];
     }
