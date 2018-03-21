@@ -41,7 +41,7 @@
 
     setInterval(() => {
       canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight/2;
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
