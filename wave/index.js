@@ -87,7 +87,7 @@
       ctx.fill();
 
       ctx.fillStyle = "#0000ff"; //blue
-      ctx.fillrect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
+      ctx.fillRect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
       
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
