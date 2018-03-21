@@ -52,8 +52,6 @@
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      ctx.fillStyle = "#ff0000"; //DARK RED
-      ctx.font = "20px Arial";
       w = canvas.width / LENGTH,
 //      analyser.getByteFrequencyData(data);
 //      data3 = data2;
@@ -62,22 +60,23 @@
 //      data = data3.concat(data2).concat(data1);
 
       if(count == 10){
-        alert("data1:"+data[1]+"\n data100:"+data[100]+"\n data200:"+data[200]);
+//        alert("data1:"+data[1]+"\n data100:"+data[100]+"\n data200:"+data[200]);
         for (i = 0; i < LENGTH; i++) {
           ave += data[i];
         }
-        alert("ave:"+ave);
+//        alert("ave:"+ave);
         ave = Math.round(ave/LENGTH);
         for (i = 0; i < LENGTH; i++) {
           rms += (data[i]-ave)*(data[i]-ave);
         }
-        alert("rms:"+rms);
+//        alert("rms:"+rms);
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
-        threshold = rms*3;
+        threshold = rms*5;
         peakcount = 0;
       }
       
+      ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
@@ -85,12 +84,17 @@
           peakcount++;
         }
       }
+
+      ctx.fillStyle = "#000000"; //blue
+      ctx.rect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
+
       ctx.fill();
       
-      ctx.fillStyle = "#000000"; //DARK RED
+      ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
       ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
-      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold:" + threshold, 10, 35);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(5*rms):" + threshold, 10, 35);
+
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
       ctx.fillText("PEAK COUNT: " + peakcount, 10, 60);
