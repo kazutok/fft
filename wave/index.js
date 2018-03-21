@@ -44,21 +44,8 @@
     src.connect(analyser);
 //    alert("fft start");
 
-    analyser.getByteTimeDomainData(data);
-    alert("data1:"+data[1]+"\n data2:"+data[2]+"\n data3:"+data[3]);
+//    analyser.getByteTimeDomainData(data);
     
-    for (i = 0; i < LENGTH; i++) {
-      ave += data[i];
-    }
-    alert("ave:"+ave);
-    ave = Math.round(ave/LENGTH);
-    for (i = 0; i < LENGTH; i++) {
-      rms += (data[i]-ave)*(data[i]-ave);
-    }
-    alert("rms:"+rms);
-    rms = rms/LENGTH;
-    rms = Math.round(Math.sqrt(rms));
-    threshold = rms*3;
     
     setInterval(() => {
       canvas.width  = window.innerWidth;
@@ -72,7 +59,23 @@
 //      data2 = data1;
       analyser.getByteTimeDomainData(data);
 //      data = data3.concat(data2).concat(data1);
-            
+
+      if(count == 0){
+        alert("data1:"+data[1]+"\n data100:"+data[100]+"\n data200:"+data[200]);
+        for (i = 0; i < LENGTH; i++) {
+          ave += data[i];
+        }
+        alert("ave:"+ave);
+        ave = Math.round(ave/LENGTH);
+        for (i = 0; i < LENGTH; i++) {
+          rms += (data[i]-ave)*(data[i]-ave);
+        }
+        alert("rms:"+rms);
+        rms = rms/LENGTH;
+        rms = Math.round(Math.sqrt(rms));
+        threshold = rms*3;
+      }
+      
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
