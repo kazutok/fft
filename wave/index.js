@@ -48,7 +48,7 @@
     for (i = 0; i < LENGTH; i++) {
       ave += data[i];
     }
-    ave = math.round(ave/LENGTH);
+    ave = Math.round(ave/LENGTH);
     for (i = 0; i < LENGTH; i++) {
       rms += (data[i]-ave)*(data[i]-ave);
     }
