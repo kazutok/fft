@@ -76,6 +76,9 @@
         peakcount = 0;
       }
       
+      ctx.fillStyle = "#0000ff"; //blue
+      ctx.fillRect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
+      
       ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
@@ -86,13 +89,10 @@
       }
       ctx.fill();
 
-      ctx.fillStyle = "#0000ff"; //blue
-      ctx.fillRect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
-      
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
-      ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
-      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(5*rms):" + threshold, 10, 35);
+      ctx.fillText("sampling_rate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=5*rms):" + threshold, 10, 35);
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
