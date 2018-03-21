@@ -35,7 +35,7 @@
         ave    = 0,
         rms    = 0,
         threshold    = 0,
-        count  = 0;
+        count  = 0,
         peakcount  = 0;
     
 //    alert(audioCtx.sampleRate + " Hz");
