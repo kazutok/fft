@@ -21,7 +21,7 @@
   }
 
   function _handleClick(evt) {
-    let LENGTH   = 2048,
+    let LENGTH   = 4096,
         audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
         options  = {
           mediaStream : evt
@@ -35,7 +35,7 @@
 
 //    alert(audioCtx.sampleRate + " Hz");
     btn.classList.add("off");
-//    analyser.fftSize = 2048;
+    analyser.fftSize = LENGTH;
     src.connect(analyser);
 //    alert("fft start");
 
