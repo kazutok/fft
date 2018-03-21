@@ -32,6 +32,9 @@
         w      = 0,
         i      = 0,
         f      = 0,
+        ave    = 0,
+        rms    = 0,
+        threshold    = 0,
         count  = 0;
     
 //    alert(audioCtx.sampleRate + " Hz");
@@ -43,9 +46,15 @@
 
     analyser.getByteTimeDomainData(data);
     for (i = 0; i < LENGTH; i++) {
-      
-    
-
+      ave += data[i];
+    }
+    ave = ave/LENGTH;
+    for (i = 0; i < LENGTH; i++) {
+      rms += (data[i]-ave)*(data[i]-ave);
+    }
+    rms = rms/LENGTH;
+    rms = Math.round(Math.sqrt(rms));
+    threshold = rms*3;
     
     setInterval(() => {
       canvas.width  = window.innerWidth;
@@ -70,9 +79,12 @@
       ctx.fill();
       
       ctx.fillStyle = "#000000"; //DARK RED
-      ctx.font = "20px Arial";
+      ctx.font = "12px Arial";
       ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 25);
-      ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 10, 50);
+      ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 10, 40);
+      ctx.fillText("RMS:" + rms + ", threshold:" + threshold, 10, 50);
+      ctx.font = "20px Arial";
+      ctx.fillText("PEAK COUNT: " + count, 10, 80);
       
     }, 20);
   }
