@@ -41,16 +41,19 @@
     src.connect(analyser);
 //    alert("fft start");
 
+    analyser.getByteTimeDomainData(data);
+    for (i = 0; i < LENGTH; i++) {
+      
+    
 
+    
     setInterval(() => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
-
       w = canvas.width / LENGTH,
-
 //      analyser.getByteFrequencyData(data);
 //      data3 = data2;
 //      data2 = data1;
@@ -69,9 +72,7 @@
       ctx.fillStyle = "#000000"; //DARK RED
       ctx.font = "20px Arial";
       ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 25);
-      ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 35, 25);
-      
-      
+      ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 10, 50);
       
     }, 20);
   }
