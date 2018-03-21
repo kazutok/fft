@@ -65,6 +65,9 @@
         }
       }
       ctx.fill();
+      
+      ctx.fillStyle = "#000000"; //DARK RED
+      ctx.font = "20px Arial";
       ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 25);
       ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 35, 25);
       
