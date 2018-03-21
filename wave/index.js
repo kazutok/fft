@@ -60,7 +60,7 @@
       }
 
       ctx.fill();
-      ctx.fillText("PEAK COUNT: " + count, 10, 25);
+      ctx.fillText("PEAK COUNT: " + count + "  w:"+canvas.width+" h:"+canvas.height, 10, 25);
     }, 20);
   }
 
