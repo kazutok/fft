@@ -75,6 +75,7 @@
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
         threshold = rms*3;
+        peakcount = 0;
       }
       
       for (i = 0; i < LENGTH; i++) {
