@@ -48,7 +48,7 @@
     for (i = 0; i < LENGTH; i++) {
       ave += data[i];
     }
-    ave = ave/LENGTH;
+    ave = math.round(ave/LENGTH);
     for (i = 0; i < LENGTH; i++) {
       rms += (data[i]-ave)*(data[i]-ave);
     }
@@ -72,7 +72,7 @@
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
-        if(data[i] > 200){
+        if(data[i] > ave + rms){
           count++;
         }
       }
@@ -80,11 +80,11 @@
       
       ctx.fillStyle = "#000000"; //DARK RED
       ctx.font = "12px Arial";
-      ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 25);
-      ctx.fillText("RMS:" + "  PEAK COUNT: " + count, 10, 40);
-      ctx.fillText("RMS:" + rms + ", threshold:" + threshold, 10, 50);
+      ctx.fillText("SamplingRate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold:" + threshold, 10, 35);
+      ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
-      ctx.fillText("PEAK COUNT: " + count, 10, 80);
+      ctx.fillText("PEAK COUNT: " + count, 10, 60);
       
     }, 20);
   }
