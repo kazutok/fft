@@ -28,10 +28,18 @@
         },
         src      = audioCtx.createMediaStreamSource(evt),
         analyser = audioCtx.createAnalyser(evt),
-        data   = new Uint8Array(LENGTH),
+        data   = new Uint8Array(LENGTH*3),
+        data1   = new Uint8Array(LENGTH),
+        data2   = new Uint8Array(LENGTH),
+        data3   = new Uint8Array(LENGTH),
         w      = 0,
         i      = 0,
         count  = 0;
+    
+    data.fill(0);
+    data1.fill(0);
+    data2.fill(0);
+    data3.fill(0);
 
 //    alert(audioCtx.sampleRate + " Hz");
     btn.classList.add("off");
@@ -46,12 +54,16 @@
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "20px Arial";
 
-      w = canvas.width / LENGTH,
+      w = canvas.width / LENGTH /3,
 
 //      analyser.getByteFrequencyData(data);
-      analyser.getByteTimeDomainData(data);
+      data3 = data2;
+      data2 = data1;
+      analyser.getByteTimeDomainData(data1);
+      data = data3.concat(data2).concat(data1);
       
-      for (i = 0; i < LENGTH; ++i) {
+      
+      for (i = 0; i < LENGTH*3; ++i) {
         ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
         if(data[i] > 200){
