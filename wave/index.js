@@ -74,30 +74,36 @@
 //        alert("rms:"+rms);
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
-        threshold = rms*5;
+        threshold = rms*10;
       }
       peak_subcount = 0;
       
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       
+      ctx.fillStyle = "#00ff00"; //green
+      for (i = 0; i < peak_history.length; i++) {
+        if( peak_history[i]/5000 >= canvas.height*0.2 ){
+          ctx.fillRect(i, canvas.height*0.8, 1, canvas.height*0.2);
+        }else{
+          ctx.fillRect(i, canvas.height*(1 - peak_history[i]/5000), 1, canvas.height*peak_history[i]/5000);
+        }
+      }
+
       ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*0.8*(1 - data[i]/255), w, canvas.height*0.8*data[i]/255);
-//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
         if(data[i] > ave + rms){
           peak_subcount++;
         }
       }
-      peak_history.push(peak_subcount);
-      peakcount += peak_subcount;
-      ctx.fill();
 
-      ctx.fillStyle = "#00ff00"; //green
-      for (i = 0; i < peak_history.length; i++) {
-        ctx.fillRect(i, canvas.height*(1 - peak_history[i]/500), 1, canvas.height*peak_history[i]/500);
-//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
+      if(count > 10){
+        peak_history.push(peak_subcount);
+        peakcount += peak_subcount;
       }
+
+      ctx.fill();
 
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
