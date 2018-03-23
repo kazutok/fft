@@ -79,7 +79,7 @@
       peak_subcount = 0;
       
       ctx.fillStyle = "#0000ff"; //blue
-      ctx.fillRect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
+      ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       
       ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
@@ -92,14 +92,11 @@
       peak_history.push(peak_subcount);
       peakcount += peak_subcount;
 
-//      ctx.fillStyle = "#00ff00"; //green
-//      for (i = 0; i < peak_history.length; i++) {
-//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
+      ctx.fillStyle = "#00ff00"; //green
+      for (i = 0; i < peak_history.length; i++) {
+        ctx.rect(i, canvas.height*(1 - peak_history[i]/100), 1, canvas.height*peak_history[i]/100);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
-//        if(data[i] > ave + rms){
-//          peakcount++;
-//        }
-//      }
+      }
 
       ctx.fill();
 
@@ -110,7 +107,7 @@
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "16px Arial";
-      ctx.fillText("PEAK COUNT: " + peakcount, 10, 60);
+      ctx.fillText("PEAK COUNT: " + peakcount, 10, 55);
       
       count++;
     }, 20);
