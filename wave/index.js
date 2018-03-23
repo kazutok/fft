@@ -91,14 +91,13 @@
       }
       peak_history.push(peak_subcount);
       peakcount += peak_subcount;
+      ctx.fill();
 
       ctx.fillStyle = "#00ff00"; //green
       for (i = 0; i < peak_history.length; i++) {
-        ctx.rect(i, canvas.height*(1 - peak_history[i]/100), 1, canvas.height*peak_history[i]/100);
+        ctx.fillRect(i, canvas.height*(1 - peak_history[i]/500), 1, canvas.height*peak_history[i]/500);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
       }
-
-      ctx.fill();
 
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
