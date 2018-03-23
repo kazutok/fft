@@ -82,11 +82,11 @@
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       
       ctx.fillStyle = "#008800"; //dark green
-      for (i = 0; i < peak_history.length; i++) {
-        if( peak_history[i]/5000 >= canvas.height*0.2 ){
+      for (i = peak_history.length - canvas.width; i < peak_history.length; i++) {
+        if( peak_history[i]/2000 >= canvas.height*0.2 ){
           ctx.fillRect(i, canvas.height*0.8, 1, canvas.height*0.2);
         }else{
-          ctx.fillRect(i, canvas.height*(1 - peak_history[i]/5000)-1, 1, canvas.height*peak_history[i]/5000+1);
+          ctx.fillRect(i, canvas.height*(1 - peak_history[i]/2000)-1, 1, canvas.height*peak_history[i]/2000+1);
         }
       }
 
