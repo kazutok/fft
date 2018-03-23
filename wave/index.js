@@ -86,11 +86,11 @@
         if( peak_history[i]/5000 >= canvas.height*0.2 ){
           ctx.fillRect(i, canvas.height*0.8, 1, canvas.height*0.2);
         }else{
-          ctx.fillRect(i, canvas.height*(1 - peak_history[i]/5000), 1, canvas.height*peak_history[i]/5000);
+          ctx.fillRect(i, canvas.height*(1 - peak_history[i]/5000)-1, 1, canvas.height*peak_history[i]/5000+1);
         }
       }
 
-      ctx.fillStyle = "#cc0000"; //DARK RED
+      ctx.fillStyle = "#dd0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*0.8*(1 - data[i]/255), w, canvas.height*0.8*data[i]/255);
         if(data[i] > ave + rms){
@@ -108,7 +108,7 @@
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
       ctx.fillText("sampling_rate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
-      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=5*rms):" + threshold, 10, 35);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=10*rms):" + threshold, 10, 35);
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "16px Arial";
