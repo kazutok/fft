@@ -36,6 +36,8 @@
         rms    = 0,
         threshold    = 0,
         count  = 0,
+        peak_history = [],
+        peak_subcount = 0,
         peakcount  = 0;
     
 //    alert(audioCtx.sampleRate + " Hz");
@@ -73,20 +75,32 @@
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
         threshold = rms*5;
-        peakcount = 0;
       }
+      peak_subcount = 0;
       
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*(1 - (ave+rms)/255), canvas.width, 1);
       
       ctx.fillStyle = "#ff0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
-        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
+        ctx.rect(i * w, canvas.height*0.8*(1 - data[i]/255), w, canvas.height*0.8*data[i]/255);
 //        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
         if(data[i] > ave + rms){
-          peakcount++;
+          peak_subcount++;
         }
       }
+      peak_history.push(peak_subcount);
+      peakcount += peak_subcount;
+
+//      ctx.fillStyle = "#00ff00"; //green
+//      for (i = 0; i < peak_history.length; i++) {
+//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, canvas.height*data[i]/255);
+//        ctx.rect(i * w, canvas.height*(1 - data[i]/255), w, 5);
+//        if(data[i] > ave + rms){
+//          peakcount++;
+//        }
+//      }
+
       ctx.fill();
 
       ctx.fillStyle = "#000000"; //black
@@ -95,7 +109,7 @@
       ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=5*rms):" + threshold, 10, 35);
 
       ctx.fillStyle = "#ff0000"; //DARK RED
-      ctx.font = "20px Arial";
+      ctx.font = "16px Arial";
       ctx.fillText("PEAK COUNT: " + peakcount, 10, 60);
       
       count++;
