@@ -51,8 +51,8 @@
     
     
     setInterval(() => {
-      if(count == 100){
-        alert("count100, 2sec");
+      if(count == 1000){
+        alert("count1000, 20sec");
       }
 
       canvas.width  = window.innerWidth;
@@ -85,7 +85,7 @@
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       ctx.font = "12px Arial";
-      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255)-15);
+      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255));
       
       ctx.fillStyle = "#008800"; //dark green
       for (i = 0; i < canvas.width; i++) {
@@ -113,12 +113,12 @@
 
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
-      ctx.fillText("sampling_rate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 10, 20);
-      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=10*rms):" + threshold, 10, 35);
+      ctx.fillText("sampling_rate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 5, 20);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=10*rms):" + threshold, 5, 35);
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "16px Arial";
-      ctx.fillText("PEAK COUNT: " + peakcount, 10, 55);
+      ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
       
       count++;
     }, 20);
