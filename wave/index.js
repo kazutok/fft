@@ -51,6 +51,10 @@
     
     
     setInterval(() => {
+      if(count == 100){
+        alert("count100, 2sec");
+      }
+
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
@@ -81,7 +85,7 @@
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       ctx.font = "12px Arial";
-      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255)+15);
+      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255)-15);
       
       ctx.fillStyle = "#008800"; //dark green
       for (i = 0; i < canvas.width; i++) {
