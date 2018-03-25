@@ -24,12 +24,12 @@
     var subject = 'HIGE CHECKER DATA';
     var body = "";
     body += "Measurement Settings<br/>";
-    body += "sampling_rate: " + f + " Hz<br/>";
-    body += "canvas.width: " + w + " px<br/>";
-    body += "canvas.height: " + h + " px<br/>";
-    body += "wave_average : " + ave + "<br/>";
-    body += "wave_rms: " + rms + "<br/>";
-    body += "wave_threshold: " + thre + "<br/>";
+    body += "- sampling_rate: " + f + " Hz<br/>";
+    body += "- canvas.width: " + w + " px<br/>";
+    body += "- canvas.height: " + h + " px<br/>";
+    body += "- wave_average : " + ave + "<br/>";
+    body += "- wave_rms: " + rms + "<br/>";
+    body += "- wave_threshold: " + thre + "<br/>";
     body += "<br/>";
     body += "timecount,time<br/>";//出力CSVのヘッダ行
     for(var i = 0; i < th.length; i++){
@@ -83,7 +83,7 @@
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
       }
       if(peak_history.length == 500){
-        sendDataViaEmail(time_history, peak_history, f, canvas.with, canvas.height, ave, rms, threshold);
+        sendDataViaEmail(time_history, peak_history, f, canvas.width, canvas.height, ave, rms, threshold);
       }
 
       canvas.width  = window.innerWidth;
