@@ -109,7 +109,7 @@
 //        alert("rms:"+rms);
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
-        threshold = rms*3;
+        threshold = ave + rms*3;
       }
       peak_subcount = 0;
       
@@ -130,7 +130,7 @@
       ctx.fillStyle = "#dd0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*0.8*(1 - data[i]/255), w, canvas.height*0.8*data[i]/255);
-        if(data[i] > ave + threshold){
+        if(data[i] > threshold){
           peak_subcount++;
         }
       }
