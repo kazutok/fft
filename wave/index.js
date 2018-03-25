@@ -25,11 +25,11 @@
     var body = "";
     body += "timecount,time<br/>";//出力CSVのヘッダ行
     for(var i = 0; i < th.length; i++){
-      body += th[i] + "\r\n";
+      body += th[i] + "<br/>";
     }
-    body += "\r\ntimecount,peak_subcount\r\n";//出力CSVのヘッダ行
+    body += "<br/>timecount,peak_subcount<br/>";//出力CSVのヘッダ行
     for(var i = 0; i < ph.length; i++){
-      body += ph[i] + "\r\n";
+      body += ph[i] + "<br/>";
     }
     location.href = 'mailto:?subject=' + subject + '&body=' + body;
   }
