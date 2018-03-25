@@ -85,7 +85,7 @@
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       ctx.font = "12px Arial";
-      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255));
+      ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255)-2);
       
       ctx.fillStyle = "#008800"; //dark green
       for (i = 0; i < canvas.width; i++) {
@@ -121,7 +121,7 @@
       ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
       
       count++;
-    }, 20);
+    }, 1);
   }
 
 })();
