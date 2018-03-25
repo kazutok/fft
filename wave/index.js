@@ -51,6 +51,7 @@
         rms    = 0,
         threshold    = 0,
         count  = 0,
+        precount  = 10,
         peak_history = [],
         time_history = [],
         peak_subcount = 0,
@@ -67,9 +68,9 @@
     
     
     setInterval(() => {
-      if(peak_history.length%100 == 0){
+      if((count-precount)%100 == 0){
         let now = new Date();
-        time_history.push(peak_history.length + "," + now.getFullYear() + "/" + parseInt(now.getMonth())+1 + "/" + now.getDate() + " " + 
+        time_history.push(peak_history.length + "," + now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
       }
       if(peak_history.length == 200){
@@ -86,7 +87,7 @@
       analyser.getByteTimeDomainData(data);
 //      data = data3.concat(data2).concat(data1);
 
-      if(count == 10){
+      if(count == precount){
 //        alert("data1:"+data[1]+"\n data100:"+data[100]+"\n data200:"+data[200]);
         for (i = 0; i < LENGTH; i++) {
           ave += data[i];
@@ -125,7 +126,7 @@
         }
       }
 
-      if(count > 10){
+      if(count > precount){
         peak_history.push(peak_subcount);
         peakcount += peak_subcount;
       }
