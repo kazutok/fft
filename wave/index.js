@@ -22,13 +22,14 @@
 
   function sendDataViaEmail(th, ph) {
     var subject, body;
-    subject = 'ヒゲチェッカーのデータ';
+    subject = 'hige_checker_data';
     for(i = 0; i < th.length; i++){
       body += th[i] + "\n";
     }
     for(i = 0; i < ph.length; i++){
       body += ph[i] + "\n";
     }
+    alert("sendDataViaEmail");
     location.href = 'mailto:gkazuto@gmail.com?subject=' + subject + '&body=' + body;
   }
 
