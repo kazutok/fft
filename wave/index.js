@@ -21,15 +21,19 @@
   }
 
   function sendDataViaEmail(th, ph) {
+    alert("sendDataViaEmail_1");
     var subject, body;
+    alert("sendDataViaEmail_2");
     subject = 'hige_checker_data';
+    alert("sendDataViaEmail_3");
     for(i = 0; i < th.length; i++){
       body += th[i] + "\n";
     }
+    alert("sendDataViaEmail_4");
     for(i = 0; i < ph.length; i++){
       body += ph[i] + "\n";
     }
-    alert("sendDataViaEmail");
+    alert("sendDataViaEmail_5");
     location.href = 'mailto:gkazuto@gmail.com?subject=' + subject + '&body=' + body;
   }
 
