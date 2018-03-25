@@ -29,7 +29,7 @@
     }
     body += "<br/>timecount,peak_subcount<br/>";//出力CSVのヘッダ行
     for(var i = 0; i < ph.length; i++){
-      body += ph[i] + "<br/>";
+      body += i + "," + ph[i] + "<br/>";
     }
     location.href = 'mailto:?subject=' + subject + '&body=' + body;
   }
@@ -69,7 +69,8 @@
     setInterval(() => {
       if(count%100 == 0){
         let now = new Date();
-        time_history.push(count + "," + now);
+        time_history.push(count + "," + now.getFullYear() + "/" + now.getMonth()+1 + "/" + now.getDate() + " " + 
+                            now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
       }
       if(count == 200){
         sendDataViaEmail(time_history, peak_history);
