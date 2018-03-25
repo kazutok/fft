@@ -67,12 +67,12 @@
     
     
     setInterval(() => {
-      if(count%100 == 0){
+      if(peak_history.length%100 == 0){
         let now = new Date();
-        time_history.push(count + "," + now.getFullYear() + "/" + now.getMonth()+1 + "/" + now.getDate() + " " + 
+        time_history.push(peak_history.length + "," + now.getFullYear() + "/" + parseInt(now.getMonth())+1 + "/" + now.getDate() + " " + 
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
       }
-      if(count == 200){
+      if(peak_history.length == 200){
         sendDataViaEmail(time_history, peak_history);
       }
 
