@@ -109,7 +109,7 @@
 //        alert("rms:"+rms);
         rms = rms/LENGTH;
         rms = Math.round(Math.sqrt(rms));
-        threshold = rms*10;
+        threshold = rms*3;
       }
       peak_subcount = 0;
       
@@ -130,7 +130,7 @@
       ctx.fillStyle = "#dd0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
         ctx.rect(i * w, canvas.height*0.8*(1 - data[i]/255), w, canvas.height*0.8*data[i]/255);
-        if(data[i] > ave + rms){
+        if(data[i] > ave + threshold){
           peak_subcount++;
         }
       }
@@ -145,7 +145,7 @@
       ctx.fillStyle = "#000000"; //black
       ctx.font = "12px Arial";
       ctx.fillText("sampling_rate:" + f + "Hz, w:" + canvas.width + ", h:" + canvas.height, 5, 20);
-      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=10*rms):" + threshold, 5, 35);
+      ctx.fillText("ave:" + ave + ", RMS:" + rms + ", threshold(=ave+3*rms):" + threshold, 5, 35);
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "16px Arial";
