@@ -23,15 +23,12 @@
   function sendDataViaEmail(th, ph) {
     var subject = 'hige_checker_data';
     var body = "";
-    alert("sendDataViaEmail_3");
     for(var i = 0; i < th.length; i++){
-      body += th[i] + "\n";
+      body += th[i] + "\r\n";
     }
-    alert("sendDataViaEmail_4");
     for(var i = 0; i < ph.length; i++){
-      body += ph[i] + "\n";
+      body += ph[i] + "\r\n";
     }
-    alert("sendDataViaEmail_5");
     location.href = 'mailto:gkazuto@gmail.com?subject=' + subject + '&body=' + body;
   }
 
@@ -57,7 +54,7 @@
         peak_subcount = 0,
         peakcount  = 0;
 
-    time_history.push("count,time");//出力CSVのヘッダ行
+    time_history.push("count,time\r\n");//出力CSVのヘッダ行
     
 //    alert(audioCtx.sampleRate + " Hz");
     f = audioCtx.sampleRate;
