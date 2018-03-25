@@ -23,13 +23,18 @@
   function sendDataViaEmail(th, ph) {
     var subject = 'HIGE CHECKER DATA';
     var body = "";
-    body += "timecount,time\r\n";//出力CSVのヘッダ行
+    body += "timecount,time
+    ";//出力CSVのヘッダ行
     for(var i = 0; i < th.length; i++){
-      body += th[i] + "\r\n";
+      body += th[i] + "
+      ";
     }
-    body += "\r\ntimecount,peak_subcount\r\n";//出力CSVのヘッダ行
+    body += "
+    timecount,peak_subcount
+    ";//出力CSVのヘッダ行
     for(var i = 0; i < ph.length; i++){
-      body += ph[i] + "\r\n";
+      body += ph[i] + "
+      ";
     }
     location.href = 'mailto:?subject=' + subject + '&body=' + body;
   }
