@@ -21,11 +21,13 @@
   }
 
   function sendDataViaEmail(th, ph) {
-    var subject = 'hige_checker_data';
+    var subject = 'HIGE CHECKER DATA';
     var body = "";
+    body += "timecount,time\r\n";//出力CSVのヘッダ行
     for(var i = 0; i < th.length; i++){
       body += th[i] + "\r\n";
     }
+    body += "\r\ntimecount,peak_subcount\r\n";//出力CSVのヘッダ行
     for(var i = 0; i < ph.length; i++){
       body += ph[i] + "\r\n";
     }
@@ -53,8 +55,6 @@
         time_history = [],
         peak_subcount = 0,
         peakcount  = 0;
-
-    time_history.push("count,time\r\n");//出力CSVのヘッダ行
     
 //    alert(audioCtx.sampleRate + " Hz");
     f = audioCtx.sampleRate;
