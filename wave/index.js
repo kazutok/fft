@@ -31,7 +31,7 @@
     for(var i = 0; i < ph.length; i++){
       body += ph[i] + "\r\n";
     }
-    location.href = 'mailto:gkazuto@gmail.com?subject=' + subject + '&body=' + body;
+    location.href = 'mailto:?subject=' + subject + '&body=' + body;
   }
 
 
