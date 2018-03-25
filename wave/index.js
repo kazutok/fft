@@ -21,10 +21,8 @@
   }
 
   function sendDataViaEmail(th, ph) {
-    alert("sendDataViaEmail_1");
-    var subject, body;
-    alert("sendDataViaEmail_2");
-    subject = 'hige_checker_data';
+    var subject = 'hige_checker_data';
+    var body = "";
     alert("sendDataViaEmail_3");
     for(i = 0; i < th.length; i++){
       body += th[i] + "\n";
