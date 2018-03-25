@@ -73,7 +73,7 @@
         time_history.push(peak_history.length + "," + now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
       }
-      if(peak_history.length == 200){
+      if(peak_history.length == 500){
         sendDataViaEmail(time_history, peak_history);
       }
 
