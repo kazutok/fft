@@ -20,6 +20,19 @@
     alert("Error!");
   }
 
+  function sendDataViaEmail(th, ph) {
+    var subject, body;
+    subject = 'ヒゲチェッカーのデータ';
+    for(i = 0; i < th.length; i++){
+      body += th[i] + "\n";
+    }
+    for(i = 0; i < ph.length; i++){
+      body += ph[i] + "\n";
+    }
+    location.href = 'mailto:gkazuto@gmail.com?subject=' + subject + '&body=' + body;
+  }
+
+
   function _handleClick(evt) {
     let LENGTH   = 2048,
         audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
@@ -37,8 +50,11 @@
         threshold    = 0,
         count  = 0,
         peak_history = [],
+        time_history = [],
         peak_subcount = 0,
         peakcount  = 0;
+
+    time_history.push("count,time");//出力CSVのヘッダ行
     
 //    alert(audioCtx.sampleRate + " Hz");
     f = audioCtx.sampleRate;
@@ -51,8 +67,12 @@
     
     
     setInterval(() => {
-      if(count == 1000){
-        alert("count1000, 20sec");
+      if(count%100 == 0){
+        let now = new Date();
+        time_history.push(count + "," + now);
+      }
+      if(count == 200){
+        sendDataViaEmail(time_history, peak_history);
       }
 
       canvas.width  = window.innerWidth;
@@ -121,7 +141,7 @@
       ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
       
       count++;
-    }, 1);
+    }, 5);
   }
 
 })();
