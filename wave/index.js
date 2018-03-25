@@ -24,11 +24,11 @@
     var subject = 'hige_checker_data';
     var body = "";
     alert("sendDataViaEmail_3");
-    for(i = 0; i < th.length; i++){
+    for(var i = 0; i < th.length; i++){
       body += th[i] + "\n";
     }
     alert("sendDataViaEmail_4");
-    for(i = 0; i < ph.length; i++){
+    for(var i = 0; i < ph.length; i++){
       body += ph[i] + "\n";
     }
     alert("sendDataViaEmail_5");
