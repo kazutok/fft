@@ -2,6 +2,8 @@
 
   "use strict";
   
+  let displaymessage  = "Recording...";
+
   let btn    = document.getElementById("btn"),
       canvas = document.getElementById("canvas"),
       ctx    = canvas.getContext("2d");
@@ -70,6 +72,7 @@
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) {
           alert( "send data: " + xhr.responseText );
+          displaymessage = "Send DATA Complete";
         }
     }
   }
@@ -129,9 +132,11 @@
 
 
       if(count == 50){
+        displaymessage = "Sending DATA...";
         let timestamp = now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds();
         sendDataViaEmail(f, LENGTH, canvas.width, canvas.height, timestamp, data, fftdata);
+
       }
 
 
@@ -169,7 +174,8 @@
 
       ctx.fillStyle = "#ff0000"; //DARK RED
       ctx.font = "16px Arial";
-      ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
+//      ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
+      ctx.fillText(displaymessage, 5, 55);
       
       count++;
     }, 40);
