@@ -43,21 +43,23 @@
 //    location.href = 'mailto:?subject=' + subject + '&body=' + body;
 //  }
 
-  function sendDataViaEmail(th, ph, f, w, h, ave, rms, thre) {
+  function sendDataViaEmail(f, fftlength, w, h, timestamp, timedata, fftdata) {
     var body = "";
-    body += f + ",";//sampling_rate Hz
-    body += w + ",";//canvas.width px
-    body += h + ",";//canvas.height: " + h + " px
-    body += ave + ",";//wave_average
-    body += rms + ",";//wave_rms
-    body += thre + ",";//wave_threshold
-    body += "time_history:,";
-    for(var i = 0; i < th.length; i++){
-      body += th[i] + ",";
+    body += "timestamp:" + timestamp + ",";//timestamp
+    body += "sampling_rate:" + f + "Hz,";//sampling_rate Hz
+    body += "fftlength:" + fftlength + ",";//fftlength Hz
+    body += "canvas.width:" + w + "px,";//canvas.width px
+    body += "canvas.height:" + h + "px,";//canvas.height px
+//    body += ave + ",";//wave_average
+//    body += rms + ",";//wave_rms
+//    body += thre + ",";//wave_threshold
+    body += "time_data:,";
+    for(var i = 0; i < timedata.length; i++){
+      body += timedata[i] + ",";
     }
-    body += "peak_subcount:,";
-    for(var i = 0; i < ph.length; i++){
-      body += ph[i] + ",";
+    body += "fft_data:,";
+    for(var i = 0; i < fftdata.length; i++){
+      body += fftdata[i] + ",";
     }
 
     var xhr = new XMLHttpRequest();
@@ -67,7 +69,7 @@
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) {
-          alert( xhr.responseText );
+          alert( "send data: " + xhr.responseText );
         }
     }
   }
@@ -83,6 +85,7 @@
         src      = audioCtx.createMediaStreamSource(evt),
         analyser = audioCtx.createAnalyser(evt),
         data   = new Uint8Array(LENGTH),
+        fftdata   = new Uint8Array(LENGTH),
         w      = 0,
         i      = 0,
         f      = 0,
@@ -90,72 +93,64 @@
         rms    = 0,
         threshold    = 0,
         count  = 0,
-        precount  = 10,
-        peak_history = [],
+//        peak_history = [],
         time_history = [],
+        alldata = [],
         peak_subcount = 0,
         peakcount  = 0;
     
-//    alert(audioCtx.sampleRate + " Hz");
     f = audioCtx.sampleRate;
     btn.classList.add("off");
     analyser.fftSize = LENGTH;
     src.connect(analyser);
-//    alert("fft start");
-
-//    analyser.getByteTimeDomainData(data);
-    
     
     setInterval(() => {
-      if((count-precount)%100 == 0){
-        let now = new Date();
-        time_history.push(peak_history.length + "," + now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
-                            now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
-      }
-      if(peak_history.length == 500){
-        sendDataViaEmail(time_history, peak_history, f, canvas.width, canvas.height, ave, rms, threshold);
-      }
+//      let now = new Date();
+//      time_history.push(peak_history.length + "," + now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
+//                            now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
+//      time_history.push(now.getSeconds() + "." + now.getMilliseconds());
+//      if(count == 100){
+//        sendDataViaEmail(time_history, alldata, f, canvas.width, canvas.height, ave, rms, threshold);
+//      }
 
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      w = canvas.width / LENGTH,
-//      analyser.getByteFrequencyData(data);
-//      data3 = data2;
-//      data2 = data1;
-      analyser.getByteTimeDomainData(data);
-//      data = data3.concat(data2).concat(data1);
+      w = canvas.width / LENGTH;
 
-      if(count == precount){
-//        alert("data1:"+data[1]+"\n data100:"+data[100]+"\n data200:"+data[200]);
-        for (i = 0; i < LENGTH; i++) {
-          ave += data[i];
-        }
-//        alert("ave:"+ave);
-        ave = Math.round(ave/LENGTH);
-        for (i = 0; i < LENGTH; i++) {
-          rms += (data[i]-ave)*(data[i]-ave);
-        }
-//        alert("rms:"+rms);
-        rms = rms/LENGTH;
-        rms = Math.round(Math.sqrt(rms));
-        threshold = ave + rms*2;
+      let now = new Date();
+      analyser.getByteTimeDomainData(data);
+      analyser.getByteFrequencyData(fftdata);
+//      if(count > 100){
+//        Array.prototype.push.apply(alldata, data);
+//        str += now1.getSeconds() + "." + now1.getMilliseconds() + "-" + now2.getSeconds() + "." + now2.getMilliseconds() + "_" + alldata.length + " ";
+//      }
+//      alldata = alldata.concat(data);
+
+
+      if(count == 20){
+        let timestamp = now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
+                            now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds();
+        sendDataViaEmail(f, LENGTH, canvas.width, canvas.height, timestamp, data, fftdata);
       }
-      peak_subcount = 0;
-      
+
+
+
+
+
       ctx.fillStyle = "#0000ff"; //blue
       ctx.fillRect(0, canvas.height*0.8*(1 - (ave+rms)/255), canvas.width, 1);
       ctx.font = "12px Arial";
       ctx.fillText("threshold", 1, canvas.height*0.8*(1 - (ave+rms)/255)-2);
       
-      ctx.fillStyle = "#008800"; //dark green
-      for (i = 0; i < canvas.width; i++) {
-        if( peak_history[i + peak_history.length - canvas.width]/2000 >= canvas.height*0.2 ){
-          ctx.fillRect(i, canvas.height*0.8, 1, canvas.height*0.2);
-        }else{
-          ctx.fillRect(i, canvas.height*(1 - peak_history[i + peak_history.length - canvas.width]/2000)-1, 1, canvas.height*peak_history[i + peak_history.length - canvas.width]/2000+1);
-        }
-      }
+//      ctx.fillStyle = "#008800"; //dark green
+//      for (i = 0; i < canvas.width; i++) {
+//        if( peak_history[i + peak_history.length - canvas.width]/2000 >= canvas.height*0.2 ){
+//          ctx.fillRect(i, canvas.height*0.8, 1, canvas.height*0.2);
+//        }else{
+//          ctx.fillRect(i, canvas.height*(1 - peak_history[i + peak_history.length - canvas.width]/2000)-1, 1, canvas.height*peak_history[i + peak_history.length - canvas.width]/2000+1);
+//        }
+//      }
 
       ctx.fillStyle = "#dd0000"; //DARK RED
       for (i = 0; i < LENGTH; i++) {
@@ -163,11 +158,6 @@
         if(data[i] > threshold){
           peak_subcount++;
         }
-      }
-
-      if(count > precount){
-        peak_history.push(peak_subcount);
-        peakcount += peak_subcount;
       }
 
       ctx.fill();
@@ -182,7 +172,7 @@
       ctx.fillText("PEAK COUNT: " + peakcount, 5, 55);
       
       count++;
-    }, 5);
+    }, 40);
   }
 
 })();
