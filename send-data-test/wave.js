@@ -128,7 +128,7 @@
 //      alldata = alldata.concat(data);
 
 
-      if(count == 20){
+      if(count == 50){
         let timestamp = now.getFullYear() + "/" + String(now.getMonth()+1) + "/" + now.getDate() + " " + 
                             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds();
         sendDataViaEmail(f, LENGTH, canvas.width, canvas.height, timestamp, data, fftdata);
